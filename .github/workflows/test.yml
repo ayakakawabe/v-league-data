@@ -18,5 +18,7 @@ jobs:
               run: docker-compose exec -T python bash
 
             - name: Run python file
-              run: python main.py
+              run: |
+                cd app/
+                python main.py
             
