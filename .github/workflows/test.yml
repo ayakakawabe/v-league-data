@@ -17,8 +17,8 @@ jobs:
             
             - name: Enter python container
               run: |
+                docker-compose run --rm python pip show selenium
                 docker-compose exec -T python bash
-                docker-compose run --rm python pip show argcomplete
                 pip list
 
             - name: Run python file
