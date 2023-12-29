@@ -9,7 +9,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
             - name: Create docker containers
               run: |
                 docker-compose build
