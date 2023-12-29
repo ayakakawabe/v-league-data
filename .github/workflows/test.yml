@@ -15,7 +15,7 @@ jobs:
                 docker-compose up -d
             
             - name: Enter python container
-              run: docker-compose exec python bash
+              run: docker-compose exec -T python bash
 
             - name: Run python file
               run: python main.py
