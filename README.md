@@ -1,12 +1,12 @@
 # v league data api
 
 ## 🔨Setup
-### Create container
+### Create containers
 ```
 docker-compose build
 ```
 
-### Run container
+### Run containers
 ```
 docker-compose up -d
 ```
@@ -17,13 +17,19 @@ docker-compose exec python bash
 ```
 
 ## 🏃Run
-### Start container
+### Start containers
 ```
 doker-compose start
 ```
+### Enter container
+```
+docker-compose exec python bash
+```
+### Run python file
 ```
 python3 main.py
 ```
+### Stop containers
 ```
 docker-compose stop
 ```
