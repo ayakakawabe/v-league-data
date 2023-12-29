@@ -1,6 +1,6 @@
-# v league data
+# v league data api
 
-## Setup
+## 🔨Setup
 ### Create container
 ```
 docker-compose build
@@ -16,12 +16,19 @@ docker-compose up -d
 docker-compose exec python bash
 ```
 
-## Run
+## 🏃Run
+### Start container
+```
+doker-compose start
+```
 ```
 python3 main.py
 ```
+```
+docker-compose stop
+```
 
-## Debug
+## 🔧Debug
 http://localhost:4444
 
 http://localhost:7900/?autoconnect=1&resize=scale&password=secret
