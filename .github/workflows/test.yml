@@ -1,0 +1,22 @@
+name: Test
+
+on:
+    push:
+
+jobs:
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Create docker containers
+              run: |
+                docker-compose build
+                docker-compose up -d
+            
+            - name: Enter python container
+              run: docker-compose exec python bash
+
+            - name: Run python file
+              run: python main.py
+            
