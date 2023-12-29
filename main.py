@@ -6,5 +6,6 @@ response=requests.get(url)
 if not response.ok:
     print(f"fialed status {response.status_code}:{response.reason}")
 else:
-    soup=bs4.BeautifulSoup(response.content,"html.parser")
-    print(soup)
+    html_text=bs4.BeautifulSoup(response.content,"html.parser")
+    text=html_text.select("table")
+    print(text[1])
