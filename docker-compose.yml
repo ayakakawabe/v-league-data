@@ -11,6 +11,7 @@ services:
         build: ./py_context
         volumes:
             - ./app:/app
+            - site-packages:/usr/local/lib/python3.12/site-packages
         tty: true
         depends_on:
             - selenium
