@@ -24,7 +24,7 @@ jobs:
             - name: Run python file
               run: |
                 cd app/
-                pip install -r ./../requirements.txt
+                pip install selenium
                 pip list 
                 python3 main.py
             
