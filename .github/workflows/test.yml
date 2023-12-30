@@ -12,6 +12,9 @@ jobs:
                 shell: bash
         steps:
             - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: '3.9.18'
             - name: Create docker containers
               run: |
                 docker-compose build
@@ -19,16 +22,11 @@ jobs:
             
             - name: Enter python container
               run: |
-                echo "/root/.local/bin" >> $GITHUB_PATH
-                docker-compose exec --user root -T python bash
                 pip list
-              env:
-                PYTHONPATH: /root/.local/bin
 
             - name: Run python file
               run: |
                 cd app/
-                pip install pipenv
                 pip install selenium==4.0.0
                 python main.py
             
