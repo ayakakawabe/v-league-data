@@ -72,8 +72,7 @@ def get_team_rank(driver):
                        "win_ratio":win_ratio
                     }}
         team_rank_dict=dict(**team_rank_dict,**team_dict_per_rank)
-    print(team_rank_dict)
-
+    return team_rank_dict
             
 
     
@@ -88,7 +87,8 @@ def get_man_v1_rank(driver):
     url=get_url(driver,0)
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
-    get_team_rank(driver)
+    man_v1["team"]=get_team_rank(driver)
+    print(man_v1)
     
 
 def latest(driver):
