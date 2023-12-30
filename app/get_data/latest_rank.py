@@ -1,20 +1,20 @@
 from selenium.webdriver.common.by import By
 
-man_v1:dict={
+men_v1:dict={
     "team":{},
     "player":{},
     "player_attak":{},
     "player_blok":{}
     }
 
-man_v2:dict={
+men_v2:dict={
     "team":{},
     "player":{},
     "player_attak":{},
     "player_blok":{}
     }
 
-man_v3:dict={
+men_v3:dict={
     "team":{},
     "player":{},
     "player_attak":{},
@@ -83,13 +83,13 @@ def get_player_attak_rank():
 def get_player_blok_rank():
     pass
 
-def get_man_v1_rank(driver):
+def get_men_v1_rank(driver):
     url=get_url(driver,0)
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
-    man_v1["team"]=get_team_rank(driver)
-    print(man_v1)
+    men_v1["team"]=get_team_rank(driver)
+    print(men_v1)
     
 
 def latest(driver):
-    get_man_v1_rank(driver)
+    get_men_v1_rank(driver)
