@@ -51,18 +51,28 @@ def get_url(driver,league:int):
     return url
 
 def get_team_rank(driver):
+    team_rank_dict:dict={}
     table=driver.find_element(By.TAG_NAME,"table")
     tbody=table.find_element(By.TAG_NAME,"tbody")
     trs=tbody.find_elements(By.TAG_NAME,"tr")
     for tr in trs:
         tds=tr.find_elements(By.TAG_NAME,"td")
         rank=tds[0].get_attribute("innerHTML")
-        team_logo_img=tds[1].find_element(By.TAG_NAME,"img").get_attribute("innerHTML")
+        team_logo_img=tds[1].find_element(By.TAG_NAME,"img").get_attribute("src")
         team_name=tds[1].find_element(By.TAG_NAME,"a").get_attribute("innerHTML")
         win=tds[2].get_attribute("innerHTML")
         loss=tds[3].get_attribute("innerHTML")
         win_ratio=tds[4].get_attribute("innerHTML")
-        print("rank:",rank,"team_logo_img:",team_logo_img,"team_name:",team_name,"win:",win,"loss:",loss,"win_ratio:",win_ratio)
+        team_dict_per_rank={str(rank):
+                   {
+                       "team_logo_url":team_logo_img,
+                       "team_name":team_name,
+                       "win":win,
+                       "loss":loss,
+                       "win_ratio":win_ratio
+                    }}
+        team_rank_dict=dict(**team_rank_dict,**team_dict_per_rank)
+    print(team_rank_dict)
 
             
 
