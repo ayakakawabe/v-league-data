@@ -21,9 +21,9 @@ jobs:
             - name: Enter python container
               run: |
                 echo "/root/.local/bin" >> $GITHUB_PATH
-                export PATH="$PYTHONPATH:/root/.local/bin"
                 docker-compose run --rm python pip show selenium
                 docker-compose exec --user root -T python bash
+                export PATH="$PYTHONPATH:/root/.local/bin"
                 pip list
 
             - name: Run python file
