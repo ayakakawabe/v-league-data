@@ -16,7 +16,6 @@ jobs:
               run: |
                 docker-compose build
                 docker-compose up -d
-                docker-compose run --rm python pip show pipenv
             
             - name: Enter python container
               run: |
@@ -29,7 +28,7 @@ jobs:
             - name: Run python file
               run: |
                 cd app/
-                pip install pyenv
+                pip install pipenv
                 pip install selenium==4.0.0
                 python main.py
             
