@@ -4,5 +4,4 @@ RUN apt-get update && \
     git \
     sudo
 RUN pip install --upgrade pip
-RUN pip install pipenv
 WORKDIR /app
