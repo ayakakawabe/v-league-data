@@ -1,28 +1,31 @@
-# v league data api
+# v-league-data-api
 
 ## 🔨Setup
-### Create containers
+```
+make setup
+```
+if you can not use ```make``` command or error occurs, use the below command.
 ```
 docker-compose build
-```
-
-### Run containers
-```
 docker-compose up -d
 ```
 
 ### Enter container
 ```
+make enter
+```
+or
+```
 docker-compose exec python bash
 ```
 
 ## 🏃Run
-### Start containers
+```
+make start
+```
+or
 ```
 doker-compose start
-```
-### Enter container
-```
 docker-compose exec python bash
 ```
 ### Run python file
@@ -31,10 +34,14 @@ python3 main.py
 ```
 ### Stop containers
 ```
+make stop
+```
+or
+```
 docker-compose stop
 ```
 
 ## 🔧Debug
-http://localhost:4444
+Point your WebDriver tests to http://localhost:4444
 
-http://localhost:7900/?autoconnect=1&resize=scale&password=secret
+👀 To see what is happening inside the container, head to http://localhost:7900/?autoconnect=1&resize=scale&password=secret
