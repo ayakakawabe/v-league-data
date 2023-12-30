@@ -27,6 +27,7 @@ jobs:
             - name: Run python file
               run: |
                 cd app/
+                pip install --upgrade pip
                 pip install selenium==4.0.0
                 python main.py
             
