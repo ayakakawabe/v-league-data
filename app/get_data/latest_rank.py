@@ -1,22 +1,85 @@
 from selenium.webdriver.common.by import By
 
-def latest(driver):
+man_v1:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+man_v2:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+man_v3:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+women_v1:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+women_v2:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+women_v3:dict={
+    "team":{},
+    "player":{},
+    "player_attak":{},
+    "player_blok":{}
+    }
+
+def get_url(driver,league:int):
     article_section=driver.find_element(By.CLASS_NAME,"block_content_record_main")
     article_section_header=article_section.find_element(By.CLASS_NAME,"js_tab_head")
-    # print(article_section_header.get_attribute('innerHTML'))
     a_tag_in_article_section_header=article_section_header.find_elements(By.TAG_NAME,"a")
-    a_tag_in_article_section_header[1].click()
+    a_tag_in_article_section_header[league].click()
     url=driver.current_url
-    print(url)
+    return url
+
+def get_team_rank(driver):
+    table=driver.find_element(By.TAG_NAME,"table")
+    tbody=table.find_element(By.TAG_NAME,"tbody")
+    trs=tbody.find_elements(By.TAG_NAME,"tr")
+    for tr in trs:
+        tds=tr.find_elements(By.TAG_NAME,"td")
+        rank=tds[0].get_attribute("innerHTML")
+        team_logo_img=tds[1].find_element(By.TAG_NAME,"img").get_attribute("innerHTML")
+        team_name=tds[1].find_element(By.TAG_NAME,"a").get_attribute("innerHTML")
+        win=tds[2].get_attribute("innerHTML")
+        loss=tds[3].get_attribute("innerHTML")
+        win_ratio=tds[4].get_attribute("innerHTML")
+        print("rank:",rank,"team_logo_img:",team_logo_img,"team_name:",team_name,"win:",win,"loss:",loss,"win_ratio:",win_ratio)
+
+            
+
+    
+
+def get_player_attak_rank():
+    pass
+
+def get_player_blok_rank():
+    pass
+
+def get_man_v1_rank(driver):
+    url=get_url(driver,0)
     driver.get(url)
-    article_section=driver.find_element(By.CLASS_NAME,"block_content_record_main")
-    # article_section_body=article_section.find_element(By.CLASS_NAME,"js_tab_body_item active col_men")
-    article_section_title=article_section.find_element(By.TAG_NAME,"h2")
-    article_section_tables=article_section.find_elements(By.TAG_NAME,"table")
-    print(article_section_title.get_attribute("innerHTML"))
-    table_titles=["team rank","player rank","player attack rank","player block rank"]
-    for i in range(len(article_section_tables)):
-        print(table_titles[i])
-        rows=article_section_tables[i].find_elements(By.TAG_NAME,"tr")
-        for j in range(len(rows)):
-            print(rows[j].get_attribute("innerHTML"))
+    page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
+    get_team_rank(driver)
+    
+
+def latest(driver):
+    get_man_v1_rank(driver)
