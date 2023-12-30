@@ -30,7 +30,5 @@ jobs:
             - name: Run python file
               run: |
                 cd app/
-                pip install selenium==4.0.0
-                pip list 
                 python main.py
             
