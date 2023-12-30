@@ -4,7 +4,5 @@ RUN apt-get update && \
     git \
     sudo
 RUN pip install --upgrade pip
-COPY ./requirements.txt /requirements.txt
-RUN pip install --no-cache-dir -r /requirements.txt --user
+RUN pip install pipenv
 WORKDIR /app
-CMD [ "python","main.py" ]

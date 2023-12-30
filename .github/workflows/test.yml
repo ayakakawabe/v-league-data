@@ -16,12 +16,11 @@ jobs:
               run: |
                 docker-compose build
                 docker-compose up -d
-                docker-compose run --rm python pip show selenium
+                docker-compose run --rm python pip show pipenv
             
             - name: Enter python container
               run: |
                 echo "/root/.local/bin" >> $GITHUB_PATH
-                docker-compose run --rm python pip show selenium
                 docker-compose exec --user root -T python bash
                 pip list
               env:
@@ -30,5 +29,6 @@ jobs:
             - name: Run python file
               run: |
                 cd app/
+                pip install selenium==4.0.0
                 python main.py
             
