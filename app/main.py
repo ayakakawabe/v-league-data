@@ -9,6 +9,7 @@ driver = webdriver.Remote(
 driver.get("https://www.vleague.jp/record")
 time.sleep(3)
 driver.quit()
+print("finish main.py")
 
 
 # import requests
