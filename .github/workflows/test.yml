@@ -29,5 +29,5 @@ jobs:
                 cd app/
                 pip install selenium==4.0.0
                 pip list 
-                python3 main.py
+                python main.py
             
