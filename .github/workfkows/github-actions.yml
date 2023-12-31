@@ -1,0 +1,25 @@
+name: github-actions
+
+on:
+    push:
+
+jobs:
+    test:
+        name: test
+        runs-on: ubuntu-20.04
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - users: action/checkout@v3
+            - name: create docker container
+              run: |
+                  make setup
+            
+            - name: enter docker python container
+              run: |
+                make enter
+            
+            - name: run python file
+              run: |
+                python3 main.py
