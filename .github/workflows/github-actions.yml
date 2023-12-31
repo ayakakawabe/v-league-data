@@ -11,7 +11,7 @@ jobs:
             run:
                 shell: bash
         steps:
-            - users: action/checkout@v3
+            - uses: actions/checkout@v3
             - name: create docker container
               run: |
                   make setup
