@@ -12,9 +12,11 @@ jobs:
                 shell: bash
         steps:
             - uses: actions/checkout@v3
-            - name: create docker container
+            - name: get path
               run: |
                 echo $GITHUB_WORKSPACE
+            - name: create docker container
+              run: |
                   make setup
             - name: start docker container
               run: |
