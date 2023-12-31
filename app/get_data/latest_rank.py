@@ -1,45 +1,45 @@
 from selenium.webdriver.common.by import By
 
-man_v1:dict={
+men_v1:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
-man_v2:dict={
+men_v2:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
-man_v3:dict={
+men_v3:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v1:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v2:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v3:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 def get_url(driver,league:int):
@@ -73,23 +73,59 @@ def get_team_rank(driver):
                     }}
         team_rank_dict=dict(**team_rank_dict,**team_dict_per_rank)
     return team_rank_dict
-            
 
-    
 
-def get_player_attak_rank():
+def get_player_rank(driver):
+    player_rank_dict:dict={}
+    button_parents=driver.find_elements(By.CLASS_NAME,"cmn_btn")
+    button=button_parents[0].find_element(By.TAG_NAME,"a")
+    button.click()
+    player_rank_url=driver.current_url
+    driver.get(player_rank_url)
+    tbody=driver.find_element(By.TAG_NAME,"tbody")
+    trs=tbody.find_elements(By.TAG_NAME,"tr")
+    trs_data=trs[1:len(trs)]
+    for tr in trs_data:
+        tds=tr.find_elements(By.TAG_NAME,"td")
+        rank=tds[0].get_attribute("innerHTML")
+        name=tds[1].get_attribute("innerHTML").replace("&nbsp;","")
+        team_name=tds[2].get_attribute("innerHTML")
+        point=tds[3].get_attribute("innerHTML")
+        game=tds[4].get_attribute("innerHTML")
+        set=tds[5].get_attribute("innerHTML")
+        attack=tds[6].get_attribute("innerHTML")
+        block=tds[7].get_attribute("innerHTML")
+        serve=tds[8].get_attribute("innerHTML")
+        player_rank_dict_per_rank={
+            "name":name,
+            "team_name":team_name,
+            "point":point,
+            "game":game,
+            "set":set,
+            "attack":attack,
+            "block":block,
+            "serve":serve
+        }
+        if str(rank) in player_rank_dict:
+            player_rank_dict[str(rank)].append(player_rank_dict_per_rank)
+        else:
+            player_rank_dict[str(rank)]=[player_rank_dict_per_rank]
+    return player_rank_dict
+
+def get_player_attack_rank():
     pass
 
-def get_player_blok_rank():
+def get_player_block_rank():
     pass
 
-def get_man_v1_rank(driver):
+def set_data_to_men_v1(driver):
     url=get_url(driver,0)
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
-    man_v1["team"]=get_team_rank(driver)
-    print(man_v1)
+    men_v1["team"]=get_team_rank(driver)
+    men_v1["player"]=get_player_rank(driver)
+    print(men_v1)
     
 
 def latest(driver):
-    get_man_v1_rank(driver)
+    set_data_to_men_v1(driver)
