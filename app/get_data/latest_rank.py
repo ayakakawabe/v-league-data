@@ -77,7 +77,14 @@ def get_team_rank(driver):
 
     
 
-def get_player_attack_rank():
+def get_player_attack_rank(driver):
+    button_parents=driver.find_elements(By.CLASS_NAME,"cmn_btn")
+    button=button_parents[0].find_element(By.TAG_NAME,"a")
+    button.click()
+    player_attack_rank_url=driver.current_url
+    driver.get(player_attack_rank_url)
+    tbody=driver.find_element(By.TAG_NAME,"tbody")
+    print(tbody.get_attribute("innerHTML"))
     pass
 
 def get_player_block_rank():
@@ -89,6 +96,7 @@ def set_data_to_men_v1(driver):
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
     men_v1["team"]=get_team_rank(driver)
     print(men_v1)
+    get_player_attack_rank(driver)
     
 
 def latest(driver):
