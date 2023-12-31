@@ -27,4 +27,5 @@ jobs:
             
             - name: run python file
               run: |
+                echo $GITHUB_WORKSPACE
                 python3 main.py
