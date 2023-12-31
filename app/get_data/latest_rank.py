@@ -3,43 +3,43 @@ from selenium.webdriver.common.by import By
 men_v1:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 men_v2:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 men_v3:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v1:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v2:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 women_v3:dict={
     "team":{},
     "player":{},
-    "player_attak":{},
-    "player_blok":{}
+    "player_attack":{},
+    "player_block":{}
     }
 
 def get_url(driver,league:int):
@@ -77,13 +77,13 @@ def get_team_rank(driver):
 
     
 
-def get_player_attak_rank():
+def get_player_attack_rank():
     pass
 
-def get_player_blok_rank():
+def get_player_block_rank():
     pass
 
-def get_men_v1_rank(driver):
+def set_data_to_men_v1(driver):
     url=get_url(driver,0)
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
@@ -92,4 +92,4 @@ def get_men_v1_rank(driver):
     
 
 def latest(driver):
-    get_men_v1_rank(driver)
+    set_data_to_men_v1(driver)
