@@ -17,15 +17,8 @@ jobs:
                 echo $GITHUB_WORKSPACE
             - name: create docker container
               run: |
-                  make setup
+                  docker-compose -f docker-compose-github-actions.yml build
+                  docker-compose -f docker-compose-github-actions.yml up -d
             - name: start docker container
               run: |
-                  make start
-            - name: enter docker python container
-              run: |
-                  docker-compose exec --user root -T python bash
-            
-            - name: run python file
-              run: |
-                echo $GITHUB_WORKSPACE
-                python3 main.py
+                  docker-compose -f docker-compose-github-actions.yml start
