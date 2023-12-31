@@ -3,7 +3,7 @@ name: github-actions
 on:
     push:
 
-job:
+jobs:
     test:
         name: test
         runs-on: ubuntu-20.04
