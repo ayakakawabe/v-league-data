@@ -15,10 +15,12 @@ jobs:
             - name: create docker container
               run: |
                   make setup
-            
+            - name: start docker container
+              run: |
+                  make start
             - name: enter docker python container
               run: |
-                make enter
+                  docker-compose exec --user root -T python bash
             
             - name: run python file
               run: |
