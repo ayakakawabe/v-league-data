@@ -4,22 +4,21 @@ on:
     push:
 
 jobs:
-    test:
-        name: test
+    github-actions:
+        name: github-actions
         runs-on: ubuntu-20.04
         defaults:
             run:
                 shell: bash
         steps:
-            - users: action/checkout@v3
-            - name: create docker container
+            - uses: actions/checkout@v4
+            - name: Create docker containers
               run: |
-                  make setup
+                make setup
             
-            - name: enter docker python container
+            - name: Enter python container
               run: |
                 make enter
-            
-            - name: run python file
+            - name: Run python file
               run: |
-                python3 main.py
+                python main.py
