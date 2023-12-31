@@ -73,19 +73,44 @@ def get_team_rank(driver):
                     }}
         team_rank_dict=dict(**team_rank_dict,**team_dict_per_rank)
     return team_rank_dict
-            
 
-    
 
 def get_player_rank(driver):
+    player_rank_dict:dict={}
     button_parents=driver.find_elements(By.CLASS_NAME,"cmn_btn")
     button=button_parents[0].find_element(By.TAG_NAME,"a")
     button.click()
-    player_attack_rank_url=driver.current_url
-    driver.get(player_attack_rank_url)
+    player_rank_url=driver.current_url
+    driver.get(player_rank_url)
     tbody=driver.find_element(By.TAG_NAME,"tbody")
-    print(tbody.get_attribute("innerHTML"))
-    pass
+    trs=tbody.find_elements(By.TAG_NAME,"tr")
+    trs_data=trs[1:len(trs)]
+    for tr in trs_data:
+        tds=tr.find_elements(By.TAG_NAME,"td")
+        rank=tds[0].get_attribute("innerHTML")
+        name=tds[1].get_attribute("innerHTML").replace("&nbsp;","")
+        team_name=tds[2].get_attribute("innerHTML")
+        point=tds[3].get_attribute("innerHTML")
+        game=tds[4].get_attribute("innerHTML")
+        set=tds[5].get_attribute("innerHTML")
+        attack=tds[6].get_attribute("innerHTML")
+        block=tds[7].get_attribute("innerHTML")
+        serve=tds[8].get_attribute("innerHTML")
+        player_rank_dict_per_rank={
+            "name":name,
+            "team_name":team_name,
+            "point":point,
+            "game":game,
+            "set":set,
+            "attack":attack,
+            "block":block,
+            "serve":serve
+        }
+        if str(rank) in player_rank_dict:
+            player_rank_dict[str(rank)].append(player_rank_dict_per_rank)
+        else:
+            player_rank_dict[str(rank)]=[player_rank_dict_per_rank]
+    return player_rank_dict
 
 def get_player_attack_rank():
     pass
@@ -98,8 +123,8 @@ def set_data_to_men_v1(driver):
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
     men_v1["team"]=get_team_rank(driver)
+    men_v1["player"]=get_player_rank(driver)
     print(men_v1)
-    get_player_rank(driver)
     
 
 def latest(driver):
