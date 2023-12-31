@@ -112,8 +112,40 @@ def get_player_rank(driver):
             player_rank_dict[str(rank)]=[player_rank_dict_per_rank]
     return player_rank_dict
 
-def get_player_attack_rank():
-    pass
+def get_player_attack_rank(driver):
+    player_attack_rank_dict:dict={}
+    button_parents=driver.find_elements(By.CLASS_NAME,"cmn_btn")
+    button=button_parents[1].find_element(By.TAG_NAME,"a")
+    button.click()
+    player_attack_rank_url=driver.current_url
+    driver.get(player_attack_rank_url)
+    tbody=driver.find_element(By.TAG_NAME,"tbody")
+    trs=tbody.find_elements(By.TAG_NAME,"tr")
+    trs_data=trs[1:len(trs)]
+    for tr in trs_data:
+        tds=tr.find_elements(By.TAG_NAME,"td")
+        rank=tds[0].get_attribute("innerHTML")
+        name=tds[1].get_attribute("innerHTML").replace("&nbsp;","")
+        team_name=tds[2].get_attribute("innerHTML")
+        shooting_rate=tds[3].get_attribute("innerHTML")
+        game=tds[4].get_attribute("innerHTML")
+        set=tds[5].get_attribute("innerHTML")
+        success=tds[6].get_attribute("innerHTML")
+        failure=tds[7].get_attribute("innerHTML")
+        player_attack_rank_dict_per_rank={
+            "name":name,
+            "team_name":team_name,
+            "shooting_rate":shooting_rate,
+            "game":game,
+            "set":set,
+            "success":success,
+            "failure":failure
+        }
+        if str(rank) in player_attack_rank_dict:
+            player_attack_rank_dict[str(rank)].append(player_attack_rank_dict_per_rank)
+        else:
+            player_attack_rank_dict[str(rank)]=[player_attack_rank_dict_per_rank]
+    return player_attack_rank_dict
 
 def get_player_block_rank():
     pass
@@ -124,7 +156,10 @@ def set_data_to_men_v1(driver):
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
     men_v1["team"]=get_team_rank(driver)
     men_v1["player"]=get_player_rank(driver)
+    driver.back()
+    men_v1["player_attack"]=get_player_attack_rank(driver)
     print(men_v1)
+
     
 
 def latest(driver):
