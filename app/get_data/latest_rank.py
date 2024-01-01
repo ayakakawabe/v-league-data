@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+import json
+import csv
+import datetime
 
 men_v1:dict={
     "team":{},
@@ -231,3 +234,6 @@ def set_data_to_men_v1(driver):
 
 def latest(driver):
     set_data_to_men_v1(driver)
+    with open('log.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(["run",datetime.date.today()])

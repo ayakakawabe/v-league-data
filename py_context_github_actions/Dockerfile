@@ -7,4 +7,5 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 WORKDIR /app
-ENTRYPOINT ["python", "main.py"]
+EXPOSE 80
+CMD ["python", "main.py"]
