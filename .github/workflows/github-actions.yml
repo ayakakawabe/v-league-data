@@ -19,3 +19,6 @@ jobs:
             - name: docker compose run
               run: |
                   docker-compose -f docker-compose-github-actions.yml up --build
+            - name: docker compose run
+              run: |
+                  docker-compose -f docker-compose-github-actions.yml down
