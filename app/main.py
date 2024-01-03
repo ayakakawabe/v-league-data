@@ -14,5 +14,3 @@ try:
 except Exception as e:
     print("error:",e)
     driver.quit()
-
-#output: .get_attribute("innerHTML")

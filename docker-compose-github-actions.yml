@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    selenium:
+        image: selenium/standalone-chrome:120.0
+        shm_size: 2gb
+        ports:
+            - 4444:4444
+            - 7900:7900
+        healthcheck:
+            test: "curl -f http://localhost:4444 || exit 1"
+            interval: 10s
+            timeout: 10s
+            retries: 3
+            start_period: 30s
+    python:
+        build: ./py_context_github_actions
+        volumes:
+            - ./app:/app
+        depends_on:
+            selenium:
+                condition: service_healthy
