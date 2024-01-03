@@ -6,13 +6,11 @@ import time
 from setup import driver,url
 from get_data import latest_rank
 
-
-try:
-    driver.get(url)
-    latest_rank.latest(driver)
-    driver.quit()
-except Exception as e:
-    print("error:",e)
-    driver.quit()
-
-#output: .get_attribute("innerHTML")
+print("run main.py")
+# try:
+#     driver.get(url)
+#     latest_rank.latest(driver)
+#     driver.quit()
+# except Exception as e:
+#     print("error:",e)
+#     driver.quit()
