@@ -19,6 +19,6 @@ jobs:
             - name: docker compose up
               run: |
                   docker-compose -f docker-compose-github-actions.yml up -d
-            - name: python container start
+            - name: python container run
               run: |
-                docker-compose -f docker-compose-github-actions.yml start
+                docker-compose -f docker-compose-github-actions.yml run python
