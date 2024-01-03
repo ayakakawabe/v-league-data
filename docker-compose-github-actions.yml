@@ -7,10 +7,17 @@ services:
         ports:
             - 4444:4444
             - 7900:7900
+        healthcheck:
+            test: "curl -f http://localhost:4444 || exit 1"
+            interval: 10s
+            timeout: 10s
+            retries: 3
+            start_period: 30s
     python:
         build: ./py_context_github_actions
         volumes:
             - ./app:/app
         tty: true
         depends_on:
-            - selenium
+            selenium:
+                condition: service_healthy

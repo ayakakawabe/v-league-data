@@ -13,12 +13,9 @@ jobs:
                 shell: bash
         steps:
             - uses: actions/checkout@v3
-            - name: docker compose build
+            - name: docker compose build and run
               run: |
-                  docker-compose -f docker-compose-github-actions.yml build
+                docker-compose -f docker-compose-github-actions.yml up --build
             - name: docker compose up
               run: |
-                  docker-compose -f docker-compose-github-actions.yml up -d
-            - name: python container run
-              run: |
-                docker-compose -f docker-compose-github-actions.yml run python
+                  docker ps
