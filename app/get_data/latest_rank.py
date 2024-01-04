@@ -47,6 +47,7 @@ def get_url(driver,league:int):
     article_section=driver.find_element(By.CLASS_NAME,"block_content_record_main")
     article_section_header=article_section.find_element(By.CLASS_NAME,"js_tab_head")
     a_tag_in_article_section_header=article_section_header.find_elements(By.TAG_NAME,"a")
+    driver.execute_script("window.scrollTo(0, 0);")
     a_tag_in_article_section_header[league].click()
     url=driver.current_url
     return url
@@ -217,6 +218,7 @@ def set_data_to_men_v1(driver):
     url=get_url(driver,0)
     driver.get(url)
     page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
+    print(page_title)
     men_v1["team"]=get_team_rank(driver)
     men_v1["player"]=get_player_rank(driver)
     driver.back()
@@ -227,7 +229,22 @@ def set_data_to_men_v1(driver):
     men_v1["player_green_card"]=get_player_green_card_rank(driver)
     print(men_v1)
 
-    
+def set_data_to_men_v2(driver):
+    url=get_url(driver,1)
+    driver.get(url)
+    page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
+    print(page_title)
+    men_v2["team"]=get_team_rank(driver)
+    men_v2["player"]=get_player_rank(driver)
+    driver.back()
+    men_v2["player_attack"]=get_player_attack_rank(driver)
+    driver.back()
+    men_v2["player_block"]=get_player_block_rank(driver)
+    driver.back()
+    men_v2["player_green_card"]=get_player_green_card_rank(driver)
+    print(men_v2)
 
 def latest(driver):
     set_data_to_men_v1(driver)
+    driver.back()
+    set_data_to_men_v2(driver)
