@@ -244,7 +244,24 @@ def set_data_to_men_v2(driver):
     men_v2["player_green_card"]=get_player_green_card_rank(driver)
     print(men_v2)
 
+def set_data_to_men_v3(driver):
+    url=get_url(driver,2)
+    driver.get(url)
+    page_title=driver.find_element(By.TAG_NAME,"h2").get_attribute("innerHTML")
+    print(page_title)
+    men_v3["team"]=get_team_rank(driver)
+    men_v3["player"]=get_player_rank(driver)
+    driver.back()
+    men_v3["player_attack"]=get_player_attack_rank(driver)
+    driver.back()
+    men_v3["player_block"]=get_player_block_rank(driver)
+    driver.back()
+    men_v3["player_green_card"]=get_player_green_card_rank(driver)
+    print(men_v3)
+
 def latest(driver):
     set_data_to_men_v1(driver)
     driver.back()
     set_data_to_men_v2(driver)
+    driver.back()
+    set_data_to_men_v3(driver)
